@@ -6,10 +6,58 @@ export interface TranscriptResponse {
   title: string;
 }
 
+const HTML_ENTITIES: Record<string, string> = {
+  amp: '&',
+  lt: '<',
+  gt: '>',
+  quot: '"',
+  apos: "'",
+  nbsp: ' ',
+  copy: '©',
+  reg: '®',
+  hellip: '…',
+  mdash: '—',
+  ndash: '–',
+  lsquo: '‘',
+  rsquo: '’',
+  ldquo: '“',
+  rdquo: '”',
+  #39: "'"
+};
+
+// Pure-string HTML entity decoder. Deliberately avoids assigning untrusted
+// text to innerHTML (CodeQL js/xss-through-dom): entity decoding does not
+// need a DOM sink.
 function decodeHtmlEntities(text: string): string {
-  const textarea = document.createElement('textarea');
-  textarea.innerHTML = text;
-  return textarea.value;
+  return text.replace(/&(#x?[0-9a-fA-F]+|[a-zA-Z]+[0-9]*);/g, (match, entity: string) => {
+    if (entity.startsWith('#x') || entity.startsWith('#X')) {
+      const code = parseInt(entity.slice(2), 16);
+      return Number.isNaN(code) ? match : String.fromCodePoint(code);
+    }
+    if (entity.startsWith('#')) {
+      const code = parseInt(entity.slice(1), 10);
+      return Number.isNaN(code) ? match : String.fromCodePoint(code);
+    }
+    const named = HTML_ENTITIES[entity];
+    return named !== undefined ? named : match;
+  });
+}
+
+// Exact-host check instead of substring matching, so attacker-controlled
+// URLs like https://youtube.com.evil.example are rejected.
+function isYouTubeUrl(url: string): boolean {
+  try {
+    const { hostname } = new URL(url);
+    return (
+      hostname === 'youtube.com' ||
+      hostname === 'www.youtube.com' ||
+      hostname === 'm.youtube.com' ||
+      hostname === 'music.youtube.com' ||
+      hostname === 'youtu.be'
+    );
+  } catch {
+    return false;
+  }
 }
 
 export async function getTranscript(url: string): Promise<TranscriptResponse> {
@@ -20,7 +68,7 @@ export async function getTranscript(url: string): Promise<TranscriptResponse> {
       url,
       endpoint: '/api/youtube/transcript',
       method: 'POST',
-      isYouTubeURL: url.includes('youtube.com') || url.includes('youtu.be'),
+      isYouTubeURL: isYouTubeUrl(url),
       originalLanguage
     });
 
