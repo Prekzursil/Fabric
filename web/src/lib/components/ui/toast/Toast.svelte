@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { toastStore } from '$lib/store/toast-store';
+  import { toastStore } from '../../../store/toast-store';
   import { fly } from 'svelte/transition';
   import { onMount } from 'svelte';
-  import type { ToastMessage } from '$lib/store/toast-store';
+  import type { ToastMessage } from '../../../store/toast-store';
 
   export let toast: ToastMessage;
   const TOAST_TIMEOUT = 5000;

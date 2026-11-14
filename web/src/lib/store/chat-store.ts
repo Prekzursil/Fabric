@@ -1,13 +1,13 @@
 import { derived, get, writable } from "svelte/store";
-import { browser } from "$app/environment";
+import { browser } from "$app/env";
 import type {
 	ChatState,
 	Message,
 	StreamResponse,
-} from "$lib/interfaces/chat-interface";
-import { ChatError, ChatService } from "$lib/services/ChatService";
-import { languageStore } from "$lib/store/language-store";
-import { selectedPatternName } from "$lib/store/pattern-store";
+} from "../interfaces/chat-interface";
+import { ChatError, ChatService } from "../services/ChatService";
+import { languageStore } from "./language-store";
+import { selectedPatternName } from "./pattern-store";
 
 // Initialize chat service
 const chatService = new ChatService();

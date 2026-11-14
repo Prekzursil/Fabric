@@ -1,5 +1,5 @@
 <script>
-  import { languageStore } from '$lib/store/language-store';
+  import { languageStore } from '../store/language-store';
 </script>
 
 <div class="language-indicator">

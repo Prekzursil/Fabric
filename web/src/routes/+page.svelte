@@ -1,6 +1,6 @@
 <script lang="ts">
-  import Terminal from '$lib/components/terminal/Terminal.svelte';
-  import Connections from '$lib/components/ui/connections/Connections.svelte';
+  import Terminal from '../lib/components/terminal/Terminal.svelte';
+  import Connections from '../lib/components/ui/connections/Connections.svelte';
   import { slide } from 'svelte/transition';
   import { quintOut } from 'svelte/easing';
   

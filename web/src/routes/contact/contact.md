@@ -5,7 +5,7 @@ description: "Default Contact Page"
 date: 2024-11-24
 ---
 <script>
-    import Contact from '$lib/components/contact/Contact.svelte';
+    import Contact from '../../lib/components/contact/Contact.svelte';
 </script>
 
 > **This is a placeholder contact page. No logic is implemented here.**

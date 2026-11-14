@@ -1,14 +1,14 @@
 <script lang="ts">
-  import { page } from '$app/stores';
+  import { page } from '$app/state';
   import { Sun, Moon, Menu, X, Github, FileText } from 'lucide-svelte';
   import { fade } from 'svelte/transition';
-  import { theme, cycleTheme, initTheme } from '$lib/store/theme-store';
+  import { theme, cycleTheme, initTheme } from '../../store/theme-store';
   import { onMount } from 'svelte';
-  import Modal from '$lib/components/ui/modal/Modal.svelte';
-  import PatternList from '$lib/components/patterns/PatternList.svelte';
-  import PatternTilesModal from '$lib/components/ui/modal/PatternTilesModal.svelte';
-  import HelpModal from '$lib/components/ui/help/HelpModal.svelte';
-  import { selectedPatternName } from '$lib/store/pattern-store';
+  import Modal from '../ui/modal/Modal.svelte';
+  import PatternList from '../patterns/PatternList.svelte';
+  import PatternTilesModal from '../ui/modal/PatternTilesModal.svelte';
+  import HelpModal from '../ui/help/HelpModal.svelte';
+  import { selectedPatternName } from '../../store/pattern-store';
 
   let isMenuOpen = false;
   let showPatternModal = false;
@@ -23,7 +23,7 @@
     isMenuOpen = !isMenuOpen;
   }
 
-  $: currentPath = $page.url.pathname;
+  $: currentPath = page.url.pathname;
   $: isDarkMode = $theme === 'my-custom-theme';
 
   const navItems = [

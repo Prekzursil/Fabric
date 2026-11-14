@@ -1,12 +1,12 @@
 <script lang="ts">
   //import Search from './Search.svelte';
   import type { PageData } from './$types';
-  import Card from '$lib/components/ui/cards/card.svelte';
+  import Card from '../../lib/components/ui/cards/card.svelte';
   import { Youtube } from 'svelte-youtube-lite';
-  import PostCard from '$lib/components/posts/PostCard.svelte';
-  import TagsInputField from '$lib/components/ui/tagsInput/TagsInputField.svelte';
-  import Connections from '$lib/components/ui/connections/Connections.svelte';
-  import Button from '$lib/components/ui/button/button.svelte';
+  import PostCard from '../../lib/components/posts/PostCard.svelte';
+  import TagsInputField from '../../lib/components/ui/tagsInput/TagsInputField.svelte';
+  import Connections from '../../lib/components/ui/connections/Connections.svelte';
+  import Button from '../../lib/components/ui/button/button.svelte';
 
   let searchQuery = '';
   let selectedTags: string[] = [];

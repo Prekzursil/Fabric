@@ -1,17 +1,17 @@
 <script lang="ts">
-  import { chatState, errorStore, streamingStore } from '$lib/store/chat-store';
+  import { chatState, errorStore, streamingStore } from '../../store/chat-store';
   import { afterUpdate, onMount } from 'svelte';
-  import { toastStore } from '$lib/store/toast-store';
+  import { toastStore } from '../../store/toast-store';
   import { marked } from 'marked';
   import SessionManager from './SessionManager.svelte';
   import { fade, slide } from 'svelte/transition';
   import { ArrowDown } from 'lucide-svelte';
-  import Modal from '$lib/components/ui/modal/Modal.svelte';
-  import PatternList from '$lib/components/patterns/PatternList.svelte';
-  import type { Message } from '$lib/interfaces/chat-interface';
+  import Modal from '../ui/modal/Modal.svelte';
+  import PatternList from '../patterns/PatternList.svelte';
+  import type { Message } from '../../interfaces/chat-interface';
   import { get } from 'svelte/store';
-  import { selectedPatternName } from '$lib/store/pattern-store';
-  import { ChatService } from '$lib/services/ChatService';
+  import { selectedPatternName } from '../../store/pattern-store';
+  import { ChatService } from '../../services/ChatService';
 
 
   let showPatternModal = false;

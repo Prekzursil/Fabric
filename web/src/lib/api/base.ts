@@ -1,4 +1,4 @@
-import type { StorageEntity } from '$lib/interfaces/storage-interface';
+import type { StorageEntity } from '../interfaces/storage-interface';
 
 interface APIErrorResponse {
   error: string;

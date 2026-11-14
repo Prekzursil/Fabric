@@ -3,17 +3,17 @@
   import ChatMessages from "./ChatMessages.svelte";
   import ModelConfig from "./ModelConfig.svelte";
   import DropdownGroup from "./DropdownGroup.svelte";
-  import NoteDrawer from "$lib/components/ui/noteDrawer/NoteDrawer.svelte";
-  import { Button } from "$lib/components/ui/button";
-  import { Input } from "$lib/components/ui/input";
-  import { Label } from "$lib/components/ui/label";
-  import { Checkbox } from "$lib/components/ui/checkbox";
-  import Tooltip from "$lib/components/ui/tooltip/Tooltip.svelte";
-  import { Textarea } from "$lib/components/ui/textarea";
-  import { obsidianSettings } from "$lib/store/obsidian-store";
-  import { featureFlags } from "$lib/config/features";
-  import { drawerStore } from '$lib/store/drawer-store';
-  import { systemPrompt, selectedPatternName } from "$lib/store/pattern-store";
+  import NoteDrawer from "../ui/noteDrawer/NoteDrawer.svelte";
+  import { Button } from "../ui/button";
+  import { Input } from "../ui/input";
+  import { Label } from "../ui/label";
+  import { Checkbox } from "../ui/checkbox";
+  import Tooltip from "../ui/tooltip/Tooltip.svelte";
+  import { Textarea } from "../ui/textarea";
+  import { obsidianSettings } from "../../store/obsidian-store";
+  import { featureFlags } from "../../config/features";
+  import { drawerStore } from '../../store/drawer-store';
+  import { systemPrompt, selectedPatternName } from "../../store/pattern-store";
   import { onMount } from "svelte";
 
   function openDrawer() {

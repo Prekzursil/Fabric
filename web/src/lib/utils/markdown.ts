@@ -18,7 +18,7 @@ export interface MdsvexCompileData {
 // Then declare the module for .md files
 //declare module '*.md' {
 //  import type { SvelteComponent } from 'svelte';
-//  import type { PostMetadata } from '$lib/interfaces/post-interface';
+//  import type { PostMetadata } from '../interfaces/post-interface';
 //  export const metadata: PostMetadata;
 //  export const frontmatter: Frontmatter;
 //  const component: SvelteComponent;

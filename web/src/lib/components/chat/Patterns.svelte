@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { Select } from "$lib/components/ui/select";
-  import { patterns, patternAPI, systemPrompt, selectedPatternName } from "$lib/store/pattern-store";
+  import { Select } from "../ui/select";
+  import { patterns, patternAPI, systemPrompt, selectedPatternName } from "../../store/pattern-store";
   import { get } from 'svelte/store';
 
   let selectedPreset = $selectedPatternName || "";

@@ -1,8 +1,8 @@
 <script lang="ts">
   import PostMeta from './PostMeta.svelte';
   import type { Post } from './post-interface'
-  import Spinner from '$lib/components/ui/spinner/spinner.svelte';
-  import Toc from '$lib/components/ui/toc/Toc.svelte';
+  import Spinner from '../ui/spinner/spinner.svelte';
+  import Toc from '../ui/toc/Toc.svelte';
 
   export let post: Post; 
 </script>

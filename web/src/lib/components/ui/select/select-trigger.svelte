@@ -1,7 +1,7 @@
 <script>
   import { Select as SelectPrimitive } from "bits-ui";
   import { ChevronDown } from "lucide-svelte";
-  import { cn } from "$lib/utils";
+  import { cn } from "../../../utils";
   import { getContext } from "svelte";
 
   let className = undefined;

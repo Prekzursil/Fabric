@@ -1,4 +1,4 @@
-import { languageStore } from '$lib/store/language-store';
+import { languageStore } from '../store/language-store';
 import { get } from 'svelte/store';
 
 export interface TranscriptResponse {

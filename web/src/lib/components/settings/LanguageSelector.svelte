@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { Label } from "$lib/components/ui/label";
-  import { Select } from "$lib/components/ui/select";
-  import { languageStore } from '$lib/store/language-store';
+  import { Label } from "../ui/label";
+  import { Select } from "../ui/select";
+  import { languageStore } from '../../store/language-store';
 
   let selectedLanguage = $languageStore;
   $: languageStore.set(selectedLanguage);

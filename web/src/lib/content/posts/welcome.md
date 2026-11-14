@@ -11,10 +11,10 @@ aliases:
   - Welcome!
 ---
 <script>
-  import { Button } from '$lib/components/ui/button';
-  import NoteDrawer from '$lib/components/ui/noteDrawer/NoteDrawer.svelte';
-  import { drawerStore } from '$lib/store/drawer-store';
-  import { page } from '$app/stores';
+  import { Button } from '../../components/ui/button';
+  import NoteDrawer from '../../components/ui/noteDrawer/NoteDrawer.svelte';
+  import { drawerStore } from '../../store/drawer-store';
+  import { page } from '$app/state';
   import { beforeNavigate } from '$app/navigation';
   
   function openDrawer() {
@@ -25,7 +25,7 @@ aliases:
     drawerStore.close();
   });
 
-  $: isVisible = $page.url.pathname.startsWith('/welcome');
+  $: isVisible = page.url.pathname.startsWith('/welcome');
 </script>
 
 This is the first post of your new blog, powered by [SvelteKit](/posts/getting-started), [Obsidian](/obsidian), and [Fabric](/about). We are excited to share this project with you and we hope you find it useful for your own writing and experiences.

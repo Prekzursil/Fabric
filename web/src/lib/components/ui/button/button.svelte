@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { cn } from "$lib/utils/utils";
+  import { cn } from "../../../utils/utils";
   import { buttonVariants } from "./index.js";
 
   let className: string | undefined = undefined;
