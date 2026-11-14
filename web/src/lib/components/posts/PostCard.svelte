@@ -2,8 +2,8 @@
   import { formatDistance } from 'date-fns';
   import type { Post } from './post-interface';
   import PostMeta from './PostMeta.svelte';
-  import Card from '$lib/components/ui/cards/card.svelte';
-  import { cn } from '$lib/utils/utils';
+  import Card from '../ui/cards/card.svelte';
+  import { cn } from '../../utils/utils';
 
   export let post: Post;
   export let className: string = '';

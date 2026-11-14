@@ -1,6 +1,6 @@
 <script>
   const year = new Date().getFullYear();
-  import BuyMeCoffee from "$lib/components/ui/buymeacoffee/BuyMeCoffee.svelte";
+  import BuyMeCoffee from "../ui/buymeacoffee/BuyMeCoffee.svelte";
 </script>
 
 <footer class="border-t bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">

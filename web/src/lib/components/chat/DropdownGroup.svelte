@@ -3,11 +3,11 @@
   import Models from "./Models.svelte";
   import ModelConfig from "./ModelConfig.svelte";
   import SessionSelector from "./SessionSelector.svelte";
-  import { Select } from "$lib/components/ui/select";
-  import { Label } from "$lib/components/ui/label";
-  import { languageStore } from '$lib/store/language-store';
-  import { strategies, selectedStrategy, fetchStrategies } from '$lib/store/strategy-store';
-  import { patternVariables } from '$lib/store/pattern-store';
+  import { Select } from "../ui/select";
+  import { Label } from "../ui/label";
+  import { languageStore } from '../../store/language-store';
+  import { strategies, selectedStrategy, fetchStrategies } from '../../store/strategy-store';
+  import { patternVariables } from '../../store/pattern-store';
   import { onMount } from 'svelte';
 
   const languages = [

@@ -1,12 +1,12 @@
 <script>
   import '../app.css';
-  import ToastContainer from '$lib/components/ui/toast/ToastContainer.svelte';
-  import Footer from '$lib/components/home/Footer.svelte';
-  import Header from '$lib/components/home/Header.svelte';
-  import { page } from '$app/stores';
+  import ToastContainer from '../lib/components/ui/toast/ToastContainer.svelte';
+  import Footer from '../lib/components/home/Footer.svelte';
+  import Header from '../lib/components/home/Header.svelte';
+  import { page } from '$app/state';
   import { fly } from 'svelte/transition';
   import { onMount } from 'svelte';
-  import { toastStore } from '$lib/store/toast-store';
+  import { toastStore } from '../lib/store/toast-store';
 
   onMount(() => {
     toastStore.info("👋 Welcome to the site! Tell people about yourself and what you do.");
@@ -19,7 +19,7 @@
   its own layout. The structure below does what AppShell did for this page: a
   column that fills the window, with a header and a footer that keep their
   height and a middle section that scrolls. -->
-{#key $page.url.pathname}
+{#key page.url.pathname}
   <div class="relative flex h-full w-full flex-col overflow-hidden">
     <div class="fixed inset-0 bg-gradient-to-br from-primary-500/20 via-tertiary-500/20 to-secondary-500/20 -z-10"></div>
     <header class="flex-none">

@@ -1,7 +1,7 @@
 <script lang='ts'>
-  import { toastStore } from '$lib/store/toast-store';
-  import { Button } from "$lib/components/ui/button";
-  import Input from '$lib/components/ui/input/Input.svelte';
+  import { toastStore } from '../../store/toast-store';
+  import { Button } from "../ui/button";
+  import Input from '../ui/input/Input.svelte';
 
   let url = '';
   let transcript = '';

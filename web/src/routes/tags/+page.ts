@@ -1,5 +1,5 @@
 import type { PageLoad } from './$types';
-import type { Frontmatter } from '$lib/utils/markdown';
+import type { Frontmatter } from '../../lib/utils/markdown';
 
 export const load: PageLoad = async () => {
 	const postFiles = import.meta.glob('/src/lib/content/posts/*.{md,svx}', { eager: true });

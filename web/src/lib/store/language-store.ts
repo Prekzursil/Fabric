@@ -1,5 +1,5 @@
 import { writable } from 'svelte/store';
-import { browser } from '$app/environment';
+import { browser } from '$app/env';
 
 const storedLanguage = browser ? localStorage.getItem('selectedLanguage') || 'en' : 'en';
 const languageStore = writable<string>(storedLanguage);

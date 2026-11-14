@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { cn } from "$lib/utils/utils";
+  import { cn } from "../../../utils/utils";
   
   export let checked: boolean = false;
   export let id: string | undefined = undefined;

@@ -1,10 +1,10 @@
 <script lang="ts">
   import { formatDistance } from 'date-fns';
   import type { PageData } from './$types';
-  import Card from '$lib/components/ui/cards/card.svelte';
+  import Card from '../../lib/components/ui/cards/card.svelte';
   import { slide } from 'svelte/transition';
   import { elasticOut, quintOut } from 'svelte/easing';
-  import TagsInputField from '$lib/components/ui/tagsInput/TagsInputField.svelte';
+  import TagsInputField from '../../lib/components/ui/tagsInput/TagsInputField.svelte';
 
   let cards = false;
   let searchQuery = '';
@@ -44,11 +44,11 @@ Could this be the new component for the search bar?
 <script lang="ts">
 	import { formatDistance } from 'date-fns';
 	import type { PageData } from './$types';
-	import Card from '$lib/components/ui/cards/card.svelte';
+	import Card from '../../lib/components/ui/cards/card.svelte';
   	import { Youtube } from 'svelte-youtube-lite';
 	import { slide } from 'svelte/transition';
 	import { elasticOut, quintOut } from 'svelte/easing';
-  import TagsInputField from '$lib/components/ui/tagsInput/TagsInputField.svelte';
+  import TagsInputField from '../../lib/components/ui/tagsInput/TagsInputField.svelte';
 
 	let cards = false;
 	let searchQuery = '';

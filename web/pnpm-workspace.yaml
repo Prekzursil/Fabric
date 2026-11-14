@@ -29,6 +29,24 @@ overrides:
   'glob@>=10.2.0 <10.5.0': '>=10.5.0'
   'esbuild@<=0.24.2': '>=0.25.0'
   '@eslint/plugin-kit@<0.3.4': '>=0.3.4'
+  # Security floors added 2026-11 (Dependabot advisories). Keep in sync with
+  # the "overrides" block in package.json, which npm reads for
+  # package-lock.json. vite and vitest are direct devDependencies and are
+  # floored in package.json instead (npm rejects range overrides on direct
+  # dependencies).
+  'devalue@<5.9.3': '>=5.9.3 <6'
+  '@vitest/mocker@<4.1.12': '>=4.1.12 <5'
+  'source-map-js@<1.2.2': '>=1.2.2 <2'
+  'postcss-selector-parser@>=6.0.0 <6.1.5': '6.1.5'
+  'postcss-selector-parser@>=7.0.0 <7.1.6': '7.1.6'
+  'minimatch@<11.0.1': '>=11.0.1'
+  'js-yaml@<4.3.2': '>=4.3.2 <5'
+  'brace-expansion@<1.1.21': '>=1.1.21 <2'
+  'brace-expansion@>=4.0.0 <5.0.12': '>=5.0.12 <6'
+  # CVE-2026-93753 (GHSA-gcqx-w48m-w2h4) affects deepmerge >=4.2.0 <=4.3.1 and
+  # has NO fixed release (4.3.1 is latest). Pin the last release outside the
+  # vulnerable range until a fix ships.
+  'deepmerge@>=4.2.0 <=4.3.1': '4.1.2'
 
 peerDependencyRules:
   allowedVersions:

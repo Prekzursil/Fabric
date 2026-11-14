@@ -1,4 +1,4 @@
-import type { ModelConfig } from '$lib/interfaces/model-interface';
+import type { ModelConfig } from '../interfaces/model-interface';
 import { api } from './base';
 
 const DEFAULT_CONFIG: Omit<ModelConfig, 'model'> = {

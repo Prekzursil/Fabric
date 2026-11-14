@@ -1,11 +1,11 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { fly } from 'svelte/transition';
-  import { noteStore } from '$lib/store/note-store';
+  import { noteStore } from '../../../store/note-store';
   import { afterNavigate, beforeNavigate } from '$app/navigation';
-  import { clickOutside } from '$lib/actions/clickOutside';
-  import { drawerStore } from '$lib/store/drawer-store';
-  import { toastStore } from '$lib/store/toast-store';
+  import { clickOutside } from '../../../actions/clickOutside';
+  import { drawerStore } from '../../../store/drawer-store';
+  import { toastStore } from '../../../store/toast-store';
 
   let textareaEl: HTMLTextAreaElement;
   let saving = false;

@@ -4,17 +4,17 @@ import type {
 	ChatRequest,
 	ChatError as IChatError,
 	StreamResponse,
-} from "$lib/interfaces/chat-interface";
-import { chatConfig } from "$lib/store/chat-config";
-import { languageStore } from "$lib/store/language-store";
-import { modelConfig } from "$lib/store/model-store";
+} from "../interfaces/chat-interface";
+import { chatConfig } from "../store/chat-config";
+import { languageStore } from "../store/language-store";
+import { modelConfig } from "../store/model-store";
 import {
 	patternVariables,
 	selectedPatternName,
 	systemPrompt,
-} from "$lib/store/pattern-store";
-import { selectedStrategy } from "$lib/store/strategy-store";
-import { currentSession } from "$lib/store/chat-store";
+} from "../store/pattern-store";
+import { selectedStrategy } from "../store/strategy-store";
+import { currentSession } from "../store/chat-store";
 
 class LanguageValidator {
 	constructor(private targetLanguage: string) {}

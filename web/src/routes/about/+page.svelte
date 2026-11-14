@@ -1,5 +1,5 @@
 <script>
-  import Toc from '$lib/components/ui/toc/Toc.svelte';
+  import Toc from '../../lib/components/ui/toc/Toc.svelte';
   import Content from './README.md';
 </script>
 

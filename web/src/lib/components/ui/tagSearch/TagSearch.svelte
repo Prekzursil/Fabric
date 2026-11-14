@@ -1,8 +1,8 @@
 <script lang="ts">
-  import TagsInputField from '$lib/components/ui/tagsInput/TagsInputField.svelte';
-  import type { PostMetadata } from '$lib/types';
-  import type { Post } from '$lib/interfaces/post-interface'
-  import PostCard from '$lib/components/posts/PostCard.svelte';
+  import TagsInputField from '../tagsInput/TagsInputField.svelte';
+  import type { PostMetadata } from '../../../types';
+  import type { Post } from '../../../interfaces/post-interface'
+  import PostCard from '../../posts/PostCard.svelte';
 
   let searchQuery = '';
   let selectedTags: string[] = [];

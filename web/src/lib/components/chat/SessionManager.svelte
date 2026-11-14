@@ -1,10 +1,10 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { RotateCcw, Trash2, Save, Copy, File as FileIcon } from 'lucide-svelte';
-  import { sessions, sessionAPI } from '$lib/store/session-store';
-  import { chatState, clearMessages, revertLastMessage, currentSession, messageStore } from '$lib/store/chat-store';
-  import { Button } from '$lib/components/ui/button';
-  import { toastService } from '$lib/services/toast-service';
+  import { sessions, sessionAPI } from '../../store/session-store';
+  import { chatState, clearMessages, revertLastMessage, currentSession, messageStore } from '../../store/chat-store';
+  import { Button } from '../ui/button';
+  import { toastService } from '../../services/toast-service';
   
   let sessionsList: string[] = [];
   $: sessionName = $currentSession;

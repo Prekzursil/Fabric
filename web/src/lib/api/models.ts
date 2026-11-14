@@ -1,5 +1,5 @@
 import { api } from './base';
-import type { VendorModel, ModelsResponse } from '$lib/interfaces/model-interface';
+import type { VendorModel, ModelsResponse } from '../interfaces/model-interface';
 
 export const modelsApi = {
   async getAvailable(): Promise<VendorModel[]> {

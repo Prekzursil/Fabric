@@ -1,13 +1,13 @@
 <script lang="ts">
     import { createEventDispatcher, onMount } from 'svelte';
-    import TagFilterPanel from '$lib/components/patterns/TagFilterPanel.svelte';
+    import TagFilterPanel from '../../patterns/TagFilterPanel.svelte';
     let tagFilterRef: TagFilterPanel;
     let selectedTags: string[] = [];
-    import { cn } from "$lib/utils/utils";
-    import type { Pattern } from '$lib/interfaces/pattern-interface';
-    import { patterns, patternAPI, selectedPatternName } from '$lib/store/pattern-store';
-    import { favorites } from '$lib/store/favorites-store';
-    import { Input } from "$lib/components/ui/input";
+    import { cn } from "../../../utils/utils";
+    import type { Pattern } from '../../../interfaces/pattern-interface';
+    import { patterns, patternAPI, selectedPatternName } from '../../../store/pattern-store';
+    import { favorites } from '../../../store/favorites-store';
+    import { Input } from "../input";
     
     const dispatch = createEventDispatcher();
     let isTagPanelOpen = false;

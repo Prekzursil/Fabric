@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { Pattern } from '$lib/interfaces/pattern-interface';
+    import type { Pattern } from '../../interfaces/pattern-interface';
     import { createEventDispatcher } from 'svelte';
     
     const dispatch = createEventDispatcher<{

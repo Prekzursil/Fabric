@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { Select } from "$lib/components/ui/select";
-  import { Label } from "$lib/components/ui/label";
-  import { currentSession, setSession, messageStore } from '$lib/store/chat-store';
-  import { sessionAPI, sessions } from '$lib/store/session-store';
+  import { Select } from "../ui/select";
+  import { Label } from "../ui/label";
+  import { currentSession, setSession, messageStore } from '../../store/chat-store';
+  import { sessionAPI, sessions } from '../../store/session-store';
   import { onMount } from 'svelte';
 
   let sessionInput = '';

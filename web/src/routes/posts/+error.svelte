@@ -1,14 +1,14 @@
 <script lang="ts">
-  import { page } from '$app/stores';
+  import { page } from '$app/state';
 </script>
 
 <div class="container flex min-h-[400px] flex-col items-center justify-center">
 	<div class="text-center">
 		<h1 class="text-4xl font-bold tracking-tighter sm:text-5xl">
-			{$page.status}: {$page.error?.message || 'Something went wrong'}
+			{page.status}: {page.error?.message || 'Something went wrong'}
 		</h1>
 		<p class="mt-4 text-muted-foreground">
-			{#if $page.status === 404}
+			{#if page.status === 404}
 				Sorry, we couldn't find the posts you're looking for.
 			{:else}
 				An error occurred while loading the posts. Please try again later.

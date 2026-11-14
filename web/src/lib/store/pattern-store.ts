@@ -1,5 +1,5 @@
-import { createStorageAPI } from '$lib/api/base';
-import type { Pattern, PatternDescription } from '$lib/interfaces/pattern-interface';
+import { createStorageAPI } from '../api/base';
+import type { Pattern, PatternDescription } from '../interfaces/pattern-interface';
 import { get, writable, derived } from 'svelte/store';
 import { languageStore } from './language-store';
 

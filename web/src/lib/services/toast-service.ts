@@ -1,4 +1,4 @@
-import { toastStore } from '$lib/store/toast-store';
+import { toastStore } from '../store/toast-store';
 
 const toastStoreInstance = toastStore;
 

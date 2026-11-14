@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { cn } from "$lib/utils/utils";
+  import { cn } from "../../../utils/utils";
 
   export let value: any = undefined;
   export let disabled = false;

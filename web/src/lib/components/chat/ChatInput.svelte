@@ -1,19 +1,19 @@
 <script lang="ts">
-  import { Button } from "$lib/components/ui/button";
-  import { Textarea } from "$lib/components/ui/textarea";
-  import { messageStore } from '$lib/store/chat-store';
-  import { systemPrompt, selectedPatternName } from '$lib/store/pattern-store';
-  import { toastStore } from '$lib/store/toast-store';
+  import { Button } from "../ui/button";
+  import { Textarea } from "../ui/textarea";
+  import { messageStore } from '../../store/chat-store';
+  import { systemPrompt, selectedPatternName } from '../../store/pattern-store';
+  import { toastStore } from '../../store/toast-store';
   import { Paperclip, Send, FileCheck } from 'lucide-svelte';
   import { onMount } from 'svelte';
   import { get } from 'svelte/store';
-  import { getTranscript } from '$lib/services/transcriptService';
-  import { ChatService } from '$lib/services/ChatService';
-  // import { obsidianSettings } from '$lib/store/obsidian-store';
-  import { languageStore } from '$lib/store/language-store';
-  import { obsidianSettings, updateObsidianSettings } from '$lib/store/obsidian-store';
-  import { PdfConversionService } from '$lib/services/PdfConversionService';
-  import { formatErrorMessage } from '$lib/utils/error-message';
+  import { getTranscript } from '../../services/transcriptService';
+  import { ChatService } from '../../services/ChatService';
+  // import { obsidianSettings } from '../../store/obsidian-store';
+  import { languageStore } from '../../store/language-store';
+  import { obsidianSettings, updateObsidianSettings } from '../../store/obsidian-store';
+  import { PdfConversionService } from '../../services/PdfConversionService';
+  import { formatErrorMessage } from '../../utils/error-message';
   import { readFileContent } from './read-file-content';
   
   const pdfService = new PdfConversionService();

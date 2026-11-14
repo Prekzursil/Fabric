@@ -1,5 +1,5 @@
 <script>
-  import { cn } from "$lib/utils";
+  import { cn } from "../../../utils";
 
   let className = undefined;
   export let value;

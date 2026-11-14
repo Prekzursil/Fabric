@@ -1,5 +1,5 @@
 import { api } from './base';
-import type { Context } from '$lib/interfaces/context-interface';
+import type { Context } from '../interfaces/context-interface';
 
 export const contextAPI = {
   async getAvailable(): Promise<Context[]> {

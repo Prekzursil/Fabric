@@ -1,13 +1,13 @@
 <script lang="ts">
   export {};
-  import { Label } from "$lib/components/ui/label";
-  import { Slider } from "$lib/components/ui/slider";
-  import { modelConfig } from "$lib/store/model-store";
+  import { Label } from "../ui/label";
+  import { Slider } from "../ui/slider";
+  import { modelConfig } from "../../store/model-store";
   import { slide } from 'svelte/transition';
   import { cubicOut } from 'svelte/easing';
-  import { browser } from '$app/environment';
-  import { clickOutside } from '$lib/actions/clickOutside';
-  import Tooltip from "$lib/components/ui/tooltip/Tooltip.svelte";
+  import { browser } from '$app/env';
+  import { clickOutside } from '../../actions/clickOutside';
+  import Tooltip from "../ui/tooltip/Tooltip.svelte";
 
   // Load expanded state from localStorage
   const STORAGE_KEY = 'modelConfigExpanded';
