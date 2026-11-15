@@ -21,8 +21,7 @@ const HTML_ENTITIES: Record<string, string> = {
   lsquo: '‘',
   rsquo: '’',
   ldquo: '“',
-  rdquo: '”',
-  #39: "'"
+  rdquo: '”'
 };
 
 // Pure-string HTML entity decoder. Deliberately avoids assigning untrusted
