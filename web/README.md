@@ -96,7 +96,7 @@ From `web/`:
 
 ```bash
 pip install -r requirements.txt #Or: pip install streamlit pandas matplotlib seaborn numpy python-dotenv pyperclip
-streamlit run streamlit.py
+streamlit run ../scripts/python_ui/fabric_ui.py
 ```
 
 Access at [http://localhost:8501](http://localhost:8501) (default port).

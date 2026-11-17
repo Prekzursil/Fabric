@@ -159,8 +159,15 @@ func (p *FilePlugin) Apply(operation string, value string) (string, error) {
 	}
 }
 
+// maxTailLines caps the ring-buffer allocation in lastNLines.
+const maxTailLines = 100000
+
 // lastNLines returns the last n lines from a file
 func (p *FilePlugin) lastNLines(path string, n int) ([]string, error) {
+	if n > maxTailLines {
+		return nil, fmt.Errorf("%s", fmt.Sprintf(i18n.T("template_file_error_too_many_lines"), n, maxTailLines))
+	}
+
 	debugf(i18n.T("template_file_log_reading_last_lines"), n, path)
 
 	file, err := os.Open(path)

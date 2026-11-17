@@ -11,9 +11,6 @@ from typing import Dict, List, Optional, Tuple
 from datetime import datetime
 import sys
 import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
-import numpy as np
 
 # Create formatters
 console_formatter = logging.Formatter(
@@ -58,6 +55,26 @@ logger.info(f"🖥️ Platform detected: {PLATFORM}")
 
 # Global variables
 pattern_dir = os.path.expanduser("~/.config/fabric/patterns")
+
+# Pattern names are user-supplied and end up in filesystem paths and log
+# records: restrict them to a conservative character set (no path
+# separators, no "..", no control characters) before any use.
+PATTERN_NAME_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9 _-]*$")
+
+
+def validate_pattern_name(pattern_name):
+    """Return (ok, error_message) for a user-supplied pattern name."""
+    if not pattern_name or not PATTERN_NAME_RE.match(pattern_name):
+        return False, (
+            "Pattern name must start with a letter or digit and may only "
+            "contain letters, digits, spaces, underscores and hyphens."
+        )
+    return True, ""
+
+
+def log_safe(value):
+    """Strip control characters so user data cannot forge log entries."""
+    return re.sub(r"[\x00-\x1f\x7f]+", " ", str(value))
 MAX_RETRIES = 3
 RETRY_DELAY = 1  # seconds
 
@@ -345,6 +362,9 @@ def load_models_and_providers() -> None:
 
 def get_pattern_metadata(pattern_name):
     """Get pattern metadata from system.md."""
+    name_ok, name_error = validate_pattern_name(pattern_name)
+    if not name_ok:
+        return None
     pattern_path = os.path.join(pattern_dir, pattern_name, "system.md")
     if os.path.exists(pattern_path):
         with open(pattern_path, "r") as f:
@@ -379,24 +399,26 @@ def create_pattern(
     new_pattern_path = None
     try:
         # Validate pattern name
-        if not pattern_name:
-            logger.error("Pattern name cannot be empty")
-            return False, "Pattern name cannot be empty."
+        name_ok, name_error = validate_pattern_name(pattern_name)
+        if not name_ok:
+            logger.error("Rejecting invalid pattern name")
+            return False, name_error
 
         # Check if pattern already exists
         new_pattern_path = os.path.join(pattern_dir, pattern_name)
         if os.path.exists(new_pattern_path):
-            logger.error(f"Pattern {pattern_name} already exists")
+            logger.error("Pattern %s already exists", log_safe(pattern_name))
             return False, "Pattern already exists."
 
         # Create pattern directory
         os.makedirs(new_pattern_path)
-        logger.info(f"Created pattern directory: {new_pattern_path}")
+        logger.info("Created pattern directory: %s", log_safe(new_pattern_path))
 
         # If content is provided, use fabric create_pattern to structure it
         if content:
             logger.info(
-                f"Structuring content for pattern '{pattern_name}' using Fabric"
+                "Structuring content for pattern '%s' using Fabric",
+                log_safe(pattern_name),
             )
             try:
                 # Get current model and provider configuration
@@ -412,7 +434,7 @@ def create_pattern(
                     cmd.extend(["--vendor", current_provider, "--model", current_model])
 
                 logger.debug(f"Running command: {' '.join(cmd)}")
-                logger.debug(f"Input content:\n{content}")
+                logger.debug("Input content: %s", log_safe(content))
 
                 # Execute pattern
                 result = run(
@@ -434,7 +456,8 @@ def create_pattern(
                     raise ValueError(f"Pattern validation failed: {validation_message}")
 
                 logger.info(
-                    f"Successfully created pattern '{pattern_name}' with structured content"
+                    "Successfully created pattern '%s' with structured content",
+                    log_safe(pattern_name),
                 )
 
             except CalledProcessError as e:
@@ -452,7 +475,9 @@ def create_pattern(
                 return False, error_msg
         else:
             # Create minimal template for manual editing
-            logger.info(f"Creating minimal template for pattern '{pattern_name}'")
+            logger.info(
+                "Creating minimal template for pattern '%s'", log_safe(pattern_name)
+            )
             system_file = os.path.join(new_pattern_path, "system.md")
             with open(system_file, "w") as f:
                 f.write("# IDENTITY and PURPOSE\n\n# STEPS\n\n# OUTPUT INSTRUCTIONS\n")
@@ -478,8 +503,9 @@ def create_pattern(
 def delete_pattern(pattern_name):
     """Delete an existing pattern."""
     try:
-        if not pattern_name:
-            return False, "Pattern name cannot be empty."
+        name_ok, name_error = validate_pattern_name(pattern_name)
+        if not name_ok:
+            return False, name_error
 
         pattern_path = os.path.join(pattern_dir, pattern_name)
         if not os.path.exists(pattern_path):
@@ -575,6 +601,10 @@ def bulk_edit_patterns(patterns_to_edit, field_to_update, new_value):
     results = []
     for pattern in patterns_to_edit:
         try:
+            name_ok, _ = validate_pattern_name(pattern)
+            if not name_ok:
+                results.append((pattern, False, "Invalid pattern name"))
+                continue
             pattern_path = os.path.join(pattern_dir, pattern)
             system_file = os.path.join(pattern_path, "system.md")
 
@@ -643,8 +673,9 @@ You are an AI assistant designed to {purpose}.
     new_content = st.text_area("Edit Pattern Content", system_content, height=400)
 
     if st.button("Create Pattern", type="primary"):
-        if not pattern_name:
-            st.error("Pattern name cannot be empty.")
+        name_ok, name_error = validate_pattern_name(pattern_name)
+        if not name_ok:
+            st.error(name_error)
         else:
             success, message = create_pattern(pattern_name)
             if success:
@@ -855,7 +886,7 @@ def execute_patterns(
                 message = (
                     current_input if chain_mode else st.session_state.input_content
                 )
-                logger.debug(f"Input for pattern {pattern}:\n{message}")
+                logger.debug("Input for pattern %s: %s", log_safe(pattern), log_safe(message))
 
                 # Ensure input_data is a string
                 input_data = str(message)
@@ -914,6 +945,9 @@ def execute_patterns(
 
 def validate_pattern(pattern_name):
     """Validate a pattern's structure and content."""
+    name_ok, name_error = validate_pattern_name(pattern_name)
+    if not name_ok:
+        return False, name_error
     try:
         pattern_path = os.path.join(pattern_dir, pattern_name)
 
@@ -941,7 +975,9 @@ def validate_pattern(pattern_name):
 
 def pattern_editor(pattern_name):
     """Edit pattern content with simple and advanced editing options."""
-    if not pattern_name:
+    name_ok, name_error = validate_pattern_name(pattern_name)
+    if not name_ok:
+        st.error(name_error)
         return
 
     pattern_path = os.path.join(pattern_dir, pattern_name)

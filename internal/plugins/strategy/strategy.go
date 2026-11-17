@@ -187,6 +187,12 @@ func LoadStrategy(filename string) (*Strategy, error) {
 		return nil, nil
 	}
 
+	// Strategy names come from CLI input: reject any parent-directory
+	// reference before the name is joined onto the strategy directory.
+	if strings.Contains(filename, "..") {
+		return nil, fmt.Errorf(i18n.T("strategy_path_traversal"), filename)
+	}
+
 	// Get the strategy directory path
 	strategyDir, err := getStrategyDir()
 	if err != nil {

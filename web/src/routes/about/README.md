@@ -511,7 +511,7 @@ To run the Streamlit user interface:
 pip install streamlit pandas matplotlib seaborn numpy python-dotenv
 
 # Run the Streamlit app
-streamlit run streamlit.py
+streamlit run scripts/python_ui/fabric_ui.py
 ```
 
 The Streamlit UI provides a user-friendly interface for:

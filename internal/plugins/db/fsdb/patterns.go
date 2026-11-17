@@ -190,6 +190,13 @@ func (o *PatternsEntity) PrintLatestPatterns(latestNumber int) (err error) {
 
 // reads a pattern from a file path and returns it
 func (o *PatternsEntity) getFromFile(pathStr string) (pattern *Pattern, err error) {
+	// The path originates from CLI input: reject embedded control
+	// characters before it is handed to the filesystem.
+	if strings.ContainsAny(pathStr, "\x00\r\n") {
+		err = fmt.Errorf(i18n.T("patterns_invalid_file_path"), pathStr)
+		return
+	}
+
 	// Handle home directory expansion
 	if strings.HasPrefix(pathStr, "~/") {
 		var homedir string

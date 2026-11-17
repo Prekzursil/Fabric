@@ -17,6 +17,7 @@ import (
 
 	"github.com/danielmiessler/fabric/internal/core"
 	"github.com/danielmiessler/fabric/internal/i18n"
+	"github.com/danielmiessler/fabric/internal/util"
 	"github.com/gin-gonic/gin"
 )
 
@@ -274,7 +275,7 @@ func (f APIConvert) ollamaChat(c *gin.Context) {
 	// Extract and validate num_ctx from options
 	numCtx, err := parseOllamaNumCtx(prompt.Options)
 	if err != nil {
-		log.Printf(i18n.T("ollama_invalid_num_ctx_in_request"), err)
+		log.Printf(i18n.T("ollama_invalid_num_ctx_in_request"), util.SanitizeLogValue(err.Error()))
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}

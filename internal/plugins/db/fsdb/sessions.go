@@ -6,6 +6,7 @@ import (
 	"github.com/danielmiessler/fabric/internal/chat"
 	"github.com/danielmiessler/fabric/internal/domain"
 	"github.com/danielmiessler/fabric/internal/i18n"
+	"github.com/danielmiessler/fabric/internal/util"
 )
 
 type SessionsEntity struct {
@@ -18,7 +19,7 @@ func (o *SessionsEntity) Get(name string) (session *Session, err error) {
 	if o.Exists(name) {
 		err = o.LoadAsJson(name, &session.Messages)
 	} else {
-		fmt.Printf(i18n.T("sessions_creating_new"), name)
+		fmt.Printf(i18n.T("sessions_creating_new"), util.SanitizeLogValue(name))
 	}
 	return
 }

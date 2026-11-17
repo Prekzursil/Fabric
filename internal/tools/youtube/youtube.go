@@ -225,6 +225,13 @@ func (o *YouTube) tryMethodYtDlpInternal(videoId string, language string, additi
 		return
 	}
 
+	// videoId is extracted from a user-supplied URL: reject traversal
+	// characters so the temp path cannot escape the temp root.
+	if strings.Contains(videoId, "..") || strings.Contains(videoId, "/") || strings.Contains(videoId, "\\") {
+		err = fmt.Errorf("%s", fmt.Sprintf(i18n.T("youtube_invalid_video_id"), videoId))
+		return
+	}
+
 	// Create a temporary directory for yt-dlp output (cross-platform)
 	tempDir := filepath.Join(os.TempDir(), "fabric-youtube-"+videoId)
 	if err = os.MkdirAll(tempDir, 0755); err != nil {

@@ -20,18 +20,20 @@ func TestFetchPlugin(t *testing.T) {
 		// ... keep existing valid test cases ...
 
 		{
-			name:        "invalid URL",
-			operation:   "get",
-			value:       "not-a-url",
-			wantErr:     true,
-			errContains: "unsupported protocol", // Updated to match actual error
+			name:      "invalid URL",
+			operation: "get",
+			value:     "not-a-url",
+			wantErr:   true,
+			// Rejected by the http(s) pre-validation before the request is built.
+			errContains: "unsupported URL",
 		},
 		{
-			name:        "malformed URL",
-			operation:   "get",
-			value:       "http://[::1]:namedport",
-			wantErr:     true,
-			errContains: "error creating request",
+			name:      "malformed URL",
+			operation: "get",
+			value:     "http://[::1]:namedport",
+			wantErr:   true,
+			// Rejected by the http(s) pre-validation before the request is built.
+			errContains: "unsupported URL",
 		},
 		// ... keep other test cases ...
 	}
