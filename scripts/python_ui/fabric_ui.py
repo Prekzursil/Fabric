@@ -64,7 +64,10 @@ PATTERN_NAME_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9 _-]*$")
 
 def validate_pattern_name(pattern_name):
     """Return (ok, error_message) for a user-supplied pattern name."""
-    if not pattern_name or not PATTERN_NAME_RE.match(pattern_name):
+    # Explicit separator/traversal rejection (recognized path sanitizers).
+    if not pattern_name or "/" in pattern_name or "\\" in pattern_name or ".." in pattern_name:
+        return False, "Pattern name must not contain path separators or '..'."
+    if not PATTERN_NAME_RE.match(pattern_name):
         return False, (
             "Pattern name must start with a letter or digit and may only "
             "contain letters, digits, spaces, underscores and hyphens."
@@ -73,8 +76,13 @@ def validate_pattern_name(pattern_name):
 
 
 def log_safe(value):
-    """Strip control characters so user data cannot forge log entries."""
-    return re.sub(r"[\x00-\x1f\x7f]+", " ", str(value))
+    """Strip line breaks so user data cannot forge log entries."""
+    return (
+        str(value)
+        .replace("\r\n", " ")
+        .replace("\n", " ")
+        .replace("\r", " ")
+    )
 MAX_RETRIES = 3
 RETRY_DELAY = 1  # seconds
 
