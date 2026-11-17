@@ -53,7 +53,7 @@ This is the high-level view of the proposed structure. It incorporates the core 
 │   │   ├── start-docker.sh      # Helper script to start docker-compose stack
 │   │   └── README.md            # Docker deployment documentation
 │   ├── python_ui
-│   │   ├── streamlit.py
+│   │   ├── fabric_ui.py
 │   │   └── requirements.txt
 │   ├── pattern_generation
 │   │   ├── extract_patterns.py
@@ -133,7 +133,7 @@ This is the high-level view of the proposed structure. It incorporates the core 
 
 8. ✅ **Move Scripts and Docs:**
     * ✅ Move Docker files (`Dockerfile`, `docker-compose.yml`) to `scripts/docker/` and create helper scripts and documentation
-    * ✅ Move Python UI (`streamlit.py` and `requirements.txt`) to `scripts/python_ui/`
+    * ✅ Move Python UI (`fabric_ui.py` (formerly streamlit.py) and `requirements.txt`) to `scripts/python_ui/`
     * ✅ Move pattern generation scripts (`extract_patterns.py`, etc.) to `scripts/pattern_generation/`
     * ✅ Move batch files (`setup_fabric.bat`) and other helper scripts into `scripts/`
     * ✅ Move documentation files like `NOTES.md` and the `images` directory into `docs/`
