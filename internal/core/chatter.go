@@ -11,12 +11,12 @@ import (
 
 	"github.com/danielmiessler/fabric/internal/domain"
 	"github.com/danielmiessler/fabric/internal/i18n"
-	"github.com/danielmiessler/fabric/internal/util"
 	debuglog "github.com/danielmiessler/fabric/internal/log"
 	"github.com/danielmiessler/fabric/internal/plugins/ai"
 	"github.com/danielmiessler/fabric/internal/plugins/db/fsdb"
 	"github.com/danielmiessler/fabric/internal/plugins/strategy"
 	"github.com/danielmiessler/fabric/internal/plugins/template"
+	"github.com/danielmiessler/fabric/internal/util"
 )
 
 type Chatter struct {

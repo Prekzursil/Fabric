@@ -11,9 +11,9 @@ import (
 
 	"github.com/danielmiessler/fabric/internal/core"
 	"github.com/danielmiessler/fabric/internal/domain"
-	"github.com/danielmiessler/fabric/internal/util"
 	"github.com/danielmiessler/fabric/internal/i18n"
 	"github.com/danielmiessler/fabric/internal/plugins/db/fsdb"
+	"github.com/danielmiessler/fabric/internal/util"
 	"github.com/gin-gonic/gin"
 )
 
