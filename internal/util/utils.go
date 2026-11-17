@@ -11,6 +11,15 @@ import (
 	"github.com/danielmiessler/fabric/internal/i18n"
 )
 
+// SanitizeLogValue strips newline and carriage-return characters from an
+// untrusted string before it is written to a log or to the console,
+// preventing forged log entries via multi-line payloads.
+func SanitizeLogValue(s string) string {
+	s = strings.ReplaceAll(s, "\r", " ")
+	s = strings.ReplaceAll(s, "\n", " ")
+	return s
+}
+
 // GetAbsolutePath resolves a given path to its absolute form, handling ~, ./, ../, UNC paths, and symlinks.
 func GetAbsolutePath(path string) (string, error) {
 	if path == "" {

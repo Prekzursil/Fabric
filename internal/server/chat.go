@@ -3,6 +3,7 @@ package restapi
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/danielmiessler/fabric/internal/util"
 	"log"
 	"net/http"
 	"strings"
@@ -79,7 +80,8 @@ func (h *ChatHandler) HandleChat(c *gin.Context) {
 	}
 
 	// Add log to check received language field
-	log.Printf("Received chat request - Language: '%s', Prompts: %d", request.Language, len(request.Prompts))
+	log.Printf("Received chat request - Language: '%s', Prompts: %d",
+		util.SanitizeLogValue(request.Language), len(request.Prompts))
 
 	// Set headers for SSE
 	c.Writer.Header().Set("Content-Type", "text/readystream")
@@ -97,7 +99,9 @@ func (h *ChatHandler) HandleChat(c *gin.Context) {
 			return
 		default:
 			log.Printf("Processing prompt %d: Model=%s Pattern=%s Context=%s",
-				i+1, prompt.Model, prompt.PatternName, prompt.ContextName)
+				i+1, util.SanitizeLogValue(prompt.Model),
+				util.SanitizeLogValue(prompt.PatternName),
+				util.SanitizeLogValue(prompt.ContextName))
 
 			streamChan := make(chan domain.StreamUpdate)
 			// Send returns an error for a failure that happens before it starts
@@ -117,7 +121,7 @@ func (h *ChatHandler) HandleChat(c *gin.Context) {
 					false,
 				)
 				if err != nil {
-					log.Printf("Error creating chatter: %v", err)
+					log.Printf("Error creating chatter: %v", util.SanitizeLogValue(err.Error()))
 					streamChan <- domain.StreamUpdate{Type: domain.StreamTypeError, Content: fmt.Sprintf(i18n.T("server_chat_error"), err)}
 					return
 				}
@@ -139,7 +143,7 @@ func (h *ChatHandler) HandleChat(c *gin.Context) {
 
 				_, err = chatter.Send(c.Request.Context(), chatReq, opts)
 				if err != nil {
-					log.Printf("Error from chatter.Send: %v", err)
+					log.Printf("Error from chatter.Send: %v", util.SanitizeLogValue(err.Error()))
 					sendErrChan <- err
 					return
 				}

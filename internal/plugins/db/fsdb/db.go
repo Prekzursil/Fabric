@@ -115,7 +115,7 @@ func (o *Db) ReadEnvFile() (map[string]string, error) {
 	return env, nil
 }
 
-func (o *Db) WithEnvLock(fn func() error) error {
+func (o *Db) WithEnvLock(fn func() error) (err error) {
 	o.envMu.Lock()
 	defer o.envMu.Unlock()
 
@@ -123,7 +123,11 @@ func (o *Db) WithEnvLock(fn func() error) error {
 	if err != nil {
 		return fmt.Errorf(i18n.T("db_error_updating_env_file"), err)
 	}
-	defer lockFile.Close()
+	defer func() {
+		if cerr := lockFile.Close(); cerr != nil && err == nil {
+			err = fmt.Errorf(i18n.T("db_error_updating_env_file"), cerr)
+		}
+	}()
 	if err := lockExclusive(lockFile); err != nil {
 		return fmt.Errorf(i18n.T("db_error_updating_env_file"), err)
 	}

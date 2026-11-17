@@ -10,6 +10,7 @@ import (
 	"io"
 	"mime"
 	"net/http"
+	"regexp"
 	"strings"
 	"unicode/utf8"
 
@@ -83,8 +84,15 @@ func (p *FetchPlugin) validateTextContent(content []byte) error {
 	return nil
 }
 
+// safeFetchURL restricts fetches to plain http(s) URLs.
+var safeFetchURL = regexp.MustCompile(`^https?://[a-zA-Z0-9.-]+(?::[0-9]+)?(?:[/?#].*)?$`)
+
 // fetch retrieves content from a URL with safety checks
 func (p *FetchPlugin) fetch(urlStr string) (string, error) {
+	if !safeFetchURL.MatchString(urlStr) {
+		return "", fmt.Errorf("%s", fmt.Sprintf(i18n.T("fetch_unsupported_url"), urlStr))
+	}
+
 	debugf("Fetch: requesting URL %q", urlStr)
 
 	client := &http.Client{}

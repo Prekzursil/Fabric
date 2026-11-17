@@ -3,6 +3,7 @@ package domain
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/danielmiessler/fabric/internal/util"
 	"os"
 	"path/filepath"
 	"slices"
@@ -173,6 +174,15 @@ func ApplyFileChanges(projectRoot string, changes []FileChange) error {
 		// Get the absolute path
 		absPath := filepath.Join(projectRoot, change.Path)
 
+		// Constrain every write to the project root: change.Path is
+		// machine-generated content and must not escape the tree being
+		// edited (filepath.Join resolves any ".." components, so a
+		// simple prefix check on its result is sound).
+		projectRootPrefix := filepath.Clean(projectRoot) + string(os.PathSeparator)
+		if !strings.HasPrefix(absPath, projectRootPrefix) {
+			return fmt.Errorf(i18n.T("file_manager_path_outside_root"), change.Path)
+		}
+
 		// Create directories if necessary
 		dir := filepath.Dir(absPath)
 		if err := os.MkdirAll(dir, 0755); err != nil {
@@ -184,7 +194,8 @@ func ApplyFileChanges(projectRoot string, changes []FileChange) error {
 			return fmt.Errorf(i18n.T("file_manager_failed_write_file"), absPath, i, err)
 		}
 
-		fmt.Printf(i18n.T("file_manager_applied_operation")+"\n", change.Operation, change.Path)
+		fmt.Printf(i18n.T("file_manager_applied_operation")+"\n",
+			util.SanitizeLogValue(change.Operation), util.SanitizeLogValue(change.Path))
 	}
 
 	return nil

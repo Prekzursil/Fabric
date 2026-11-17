@@ -35,8 +35,8 @@ const (
 
 // URL pattern regexes for parsing Spotify URLs
 var (
-	showPatternRegex    = regexp.MustCompile(`spotify\.com/show/([a-zA-Z0-9]+)`)
-	episodePatternRegex = regexp.MustCompile(`spotify\.com/episode/([a-zA-Z0-9]+)`)
+	showPatternRegex    = regexp.MustCompile(`^https?://(?:open\.)?spotify\.com/show/([a-zA-Z0-9]+)`)
+	episodePatternRegex = regexp.MustCompile(`^https?://(?:open\.)?spotify\.com/episode/([a-zA-Z0-9]+)`)
 )
 
 // NewSpotify creates a new Spotify client instance.

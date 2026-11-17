@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/danielmiessler/fabric/internal/util"
 	"os"
 	"strings"
 
@@ -190,14 +191,14 @@ func (o *Chatter) Send(ctx context.Context, request *domain.ChatRequest, opts *d
 	if request.PatternName == "create_coding_feature" {
 		summary, fileChanges, parseErr := domain.ParseFileChanges(message)
 		if parseErr != nil {
-			fmt.Printf("%s\n", fmt.Sprintf(i18n.T("chatter_warning_parse_file_changes_failed"), parseErr))
+			fmt.Printf("%s\n", util.SanitizeLogValue(fmt.Sprintf(i18n.T("chatter_warning_parse_file_changes_failed"), parseErr)))
 		} else if len(fileChanges) > 0 {
 			projectRoot, err := os.Getwd()
 			if err != nil {
-				fmt.Printf("%s\n", fmt.Sprintf(i18n.T("chatter_warning_get_current_directory_failed"), err))
+				fmt.Printf("%s\n", util.SanitizeLogValue(fmt.Sprintf(i18n.T("chatter_warning_get_current_directory_failed"), err)))
 			} else {
 				if applyErr := domain.ApplyFileChanges(projectRoot, fileChanges); applyErr != nil {
-					fmt.Printf("%s\n", fmt.Sprintf(i18n.T("chatter_warning_apply_file_changes_failed"), applyErr))
+					fmt.Printf("%s\n", util.SanitizeLogValue(fmt.Sprintf(i18n.T("chatter_warning_apply_file_changes_failed"), applyErr)))
 				} else {
 					fmt.Println(i18n.T("chatter_info_file_changes_applied_successfully"))
 					fmt.Printf("%s\n\n", i18n.T("chatter_help_review_changes_with_git_diff"))

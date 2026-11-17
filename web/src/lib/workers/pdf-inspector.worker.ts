@@ -15,6 +15,10 @@ export type PdfResponse =
 const ready = init();
 
 self.onmessage = async (event: MessageEvent<PdfRequest>) => {
+  if (event.origin !== self.origin) {
+    self.postMessage({ id: event.data.id, ok: false, error: 'Rejected: unexpected message origin' } satisfies PdfResponse);
+    return;
+  }
   const { id, buffer } = event.data;
   try {
     await ready;

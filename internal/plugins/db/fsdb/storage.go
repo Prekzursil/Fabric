@@ -131,6 +131,9 @@ func (o *StorageEntity) BuildFilePath(fileName string) (ret string) {
 }
 
 func (o *StorageEntity) buildFileName(name string) string {
+	// Entity names originate from CLI input. Strip any parent-directory
+	// references so the resolved path can never escape the storage dir.
+	name = strings.ReplaceAll(name, "..", "_")
 	return fmt.Sprintf("%s%v", name, o.FileExtension)
 }
 

@@ -8,6 +8,7 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"regexp"
 	"strings"
 	"time"
 
@@ -28,6 +29,10 @@ func NewExtensionExecutor(registry *ExtensionRegistry) *ExtensionExecutor {
 	}
 }
 
+// shellUnsafeInput matches control characters that must never appear in
+// a value substituted into a "sh -c" command line.
+var shellUnsafeInput = regexp.MustCompile(`[\x00\r\n]`)
+
 // Execute runs an extension with the given operation and value string
 // name: the registered name of the extension
 // operation: the operation to perform
@@ -38,6 +43,12 @@ func (e *ExtensionExecutor) Execute(name, operation, value string) (string, erro
 	ext, err := e.registry.GetExtension(name)
 	if err != nil {
 		return "", fmt.Errorf(i18n.T("extension_failed_get_extension"), err)
+	}
+
+	// The formatted command runs via "sh -c": reject values containing
+	// control characters that could inject additional command lines.
+	if shellUnsafeInput.MatchString(value) {
+		return "", fmt.Errorf("%s", fmt.Sprintf(i18n.T("extension_unsafe_value"), value))
 	}
 
 	// Format the command using our template system
