@@ -3,13 +3,13 @@ package domain
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/danielmiessler/fabric/internal/util"
 	"os"
 	"path/filepath"
 	"slices"
 	"strings"
 
 	"github.com/danielmiessler/fabric/internal/i18n"
+	"github.com/danielmiessler/fabric/internal/util"
 )
 
 // FileChangesMarker identifies the start of a file changes section in output

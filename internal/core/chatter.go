@@ -4,7 +4,6 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"github.com/danielmiessler/fabric/internal/util"
 	"os"
 	"strings"
 
@@ -12,6 +11,7 @@ import (
 
 	"github.com/danielmiessler/fabric/internal/domain"
 	"github.com/danielmiessler/fabric/internal/i18n"
+	"github.com/danielmiessler/fabric/internal/util"
 	debuglog "github.com/danielmiessler/fabric/internal/log"
 	"github.com/danielmiessler/fabric/internal/plugins/ai"
 	"github.com/danielmiessler/fabric/internal/plugins/db/fsdb"

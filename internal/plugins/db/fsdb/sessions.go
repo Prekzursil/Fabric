@@ -2,11 +2,11 @@ package fsdb
 
 import (
 	"fmt"
-	"github.com/danielmiessler/fabric/internal/util"
 
 	"github.com/danielmiessler/fabric/internal/chat"
 	"github.com/danielmiessler/fabric/internal/domain"
 	"github.com/danielmiessler/fabric/internal/i18n"
+	"github.com/danielmiessler/fabric/internal/util"
 )
 
 type SessionsEntity struct {

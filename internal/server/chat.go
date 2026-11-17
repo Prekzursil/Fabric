@@ -3,7 +3,6 @@ package restapi
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/danielmiessler/fabric/internal/util"
 	"log"
 	"net/http"
 	"strings"
@@ -12,6 +11,7 @@ import (
 
 	"github.com/danielmiessler/fabric/internal/core"
 	"github.com/danielmiessler/fabric/internal/domain"
+	"github.com/danielmiessler/fabric/internal/util"
 	"github.com/danielmiessler/fabric/internal/i18n"
 	"github.com/danielmiessler/fabric/internal/plugins/db/fsdb"
 	"github.com/gin-gonic/gin"

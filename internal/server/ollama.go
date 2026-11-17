@@ -6,7 +6,6 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/danielmiessler/fabric/internal/util"
 	"io"
 	"log"
 	"math"
@@ -18,6 +17,7 @@ import (
 
 	"github.com/danielmiessler/fabric/internal/core"
 	"github.com/danielmiessler/fabric/internal/i18n"
+	"github.com/danielmiessler/fabric/internal/util"
 	"github.com/gin-gonic/gin"
 )
 
